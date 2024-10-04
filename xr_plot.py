@@ -7,7 +7,7 @@ import xarray as xr
 
 
 def plot_xarray_2d(X: xr.DataArray, need_log=False, show_ax_names=True,
-                   clim=(None, None)):
+                   clim=(None, None), **kwargs):
     coord_x = X.dims[1]
     coord_y = X.dims[0]
     cx = X.coords[coord_x].values
@@ -17,7 +17,7 @@ def plot_xarray_2d(X: xr.DataArray, need_log=False, show_ax_names=True,
     if need_log:
         X_ = np.log(X_)
     plt.imshow(X_, aspect='auto', extent=ext, origin='upper',
-               vmin=clim[0], vmax=clim[1])
+               vmin=clim[0], vmax=clim[1], **kwargs)
     plt.xlim(cx[0], cx[-1])
     plt.ylim(cy[-1], cy[0])
     if show_ax_names:
